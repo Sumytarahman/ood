@@ -1,0 +1,91 @@
+1. Functional Requirements
+1. Students can register and login.
+2. Faculty can register and login.
+3. Students can view courses.
+4. Students can register for courses.
+5. Students can check total credits.
+6. Faculty can publish results.
+7. Students can receive notifications.
+8. Admin can add courses.
+9. Admin can view registrations.
+10. Admin can publish notices.
+11. Admin can view library information.
+
+2. Non-Functional Requirements
+1. Usability: Easy to use.
+2. Performance: Works fast.
+3. Security: Keeps data safe.
+4. Reliability: Works correctly.
+5. Maintainability: Easy to update.
+6. Availability: Available when needed.
+
+Entity Objects
+যেসব class data store করে।
+- Student – Student-এর information রাখে।
+- Faculty – Faculty-এর information রাখে।
+- Course – Course-এর information রাখে।
+- Marks – Student-এর marks রাখে।
+2. Boundary Objects
+যেসব method বা class user-এর সাথে interaction করে।
+- studentUI() – Student-এর সাথে interaction করে।
+- facultyUI() – Faculty-এর সাথে interaction করে।
+- adminUI() – Admin-এর সাথে interaction করে।
+- LibraryAdapter – External library system-এর সাথে communication করে।
+3. Control Objects
+যেসব class system-এর কাজ বা process control করে।
+- RegistrationManager – Course registration manage করে।
+- AccountFactory – Student ও Faculty account তৈরি করে।
+- NoticePublisher – Notification পাঠায়।
+- EvaluationService – Result evaluation manage করে।
+
+
+CRC = Class, Responsibilities, Collaborators
+1. Student
+Class	Student
+Responsibilities	Register course, view courses, check credit, receive notice
+Collaborators	Course, RegistrationManager, StudentPortal
+
+2. Faculty
+Class	Faculty
+Responsibilities	Login, view students, publish results
+Collaborators	Marks, EvaluationService
+
+3. Course
+Class	Course
+Responsibilities	Store course name, code, credit, capacity
+Collaborators	Student, RegistrationManager
+
+4. RegistrationManager
+Class	RegistrationManager
+Responsibilities	Register students, check duplicate, check credit limit
+Collaborators	Student, Course
+
+5. NoticePublisher
+Class	NoticePublisher
+Responsibilities	Send notices and notifications
+Collaborators	StudentPortal, CampusObserver
+
+6. EvaluationService
+Class	EvaluationService
+Responsibilities	Evaluate student marks and calculate results
+Collaborators	Marks, TheoryEvaluation, LabEvaluation
+
+
+
+uml
+
+student-course
+-registrationManager
+
+faculty-EvaluationService
+-marks
+
+NoticePublisher-studentportal
+
+UML Sequence Diagram (Text Format)
+1. Student → Student Menu: Select Register Course.
+2. Student Menu → RegistrationManager: Call register().
+3. RegistrationManager → Course: Check course information.
+4. Course → RegistrationManager: Return course information.
+5. RegistrationManager → Student Menu: Registration successful.
+6. Student Menu → Student: Show confirmation message.

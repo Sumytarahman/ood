@@ -1,0 +1,92 @@
+Functional Requirements
+Functional requirements describe the main functions and services that a system must provide.
+
+For the Smart Irrigation System, the functional requirements are:
+
+1. Add Farm Field: The system shall allow users to add new farm fields by entering field names.
+
+2. View Farm Fields: The system shall display the list of all added farm fields.
+
+3. Select Irrigation Strategy: The system shall allow users to select either Normal Irrigation Strategy or Water Saving Strategy.
+
+4. Select Sensor: The system shall allow users to select a Soil Moisture Sensor or a Temperature Sensor.
+
+5. Read Sensor Data: The system shall accept sensor readings from the user.
+
+6. Check Weather Conditions: The system shall accept information about whether rain is expected or not.
+
+7. Control Irrigation Pump: The system shall turn the irrigation pump ON or OFF based on the selected strategy, sensor reading, and weather conditions.
+
+8. Send Notifications: The system shall send irrigation status alerts to the farmer and display them on the farm dashboard.
+
+9. Exit System: The system shall allow users to exit the application.
+Non-Functional Requirements
+Non-functional requirements describe the quality, performance, and characteristics of a system.
+
+For the Smart Irrigation System, the non-functional requirements are:
+
+1. Usability: The system shall provide a simple and user-friendly menu.
+
+2. Maintainability: The system shall use separate classes and methods so that the code can be easily modified and maintained.
+
+3. Modularity: The system shall separate sensors, weather services, irrigation strategies, and notification components.
+
+4. Reliability: The system shall validate user inputs to reduce errors during operation.
+
+5. Reusability: The system shall allow components, such as sensors and irrigation strategies, to be reused or extended.
+
+6. Extensibility: The system shall support adding new sensor types and irrigation strategies with minimal changes to existing code.
+
+
+
+
+
+Object Type	Objects
+Entity	Field, WeatherData, SoilMoistureSensor, TemperatureSensor, IrrigationPump
+Control	IrrigationController, SensorFactory, WeatherAPIAdapter, AlertPublisher, FarmDataManager, NormalIrrigationStrategy, WaterSavingStrategy
+Boundary	AASMain, Scanner, ExternalWeatherAPI
+
+
+
+
+RC Card 1: Sensor
+Class	Sensor
+Responsibilities	1. Define sensor type.
+	2. Read sensor data.
+Collaborators	SoilMoistureSensor, TemperatureSensor, SensorFactory
+
+CRC Card 2: SensorFactory
+Class	SensorFactory
+Responsibilities	1. Create sensor objects.
+	2. Select the appropriate sensor based on user choice.
+Collaborators	Sensor, SoilMoistureSensor, TemperatureSensor
+
+CRC Card 3: WeatherService
+Class	WeatherService
+Responsibilities	1. Provide current weather information.
+	2. Check whether rain is expected.
+Collaborators	WeatherAPIAdapter, WeatherData, ExternalWeatherAPI
+
+CRC Card 4: IrrigationStrategy
+Class	IrrigationStrategy
+Responsibilities	1. Decide whether irrigation is required.
+	2. Apply irrigation rules based on soil moisture and weather conditions.
+Collaborators	NormalIrrigationStrategy, WaterSavingStrategy, WeatherData
+
+CRC Card 5: IrrigationController
+Class	IrrigationController
+Responsibilities	1. Read sensor data.
+	2. Get weather information.
+	3. Decide whether irrigation is needed.
+	4. Control the irrigation pump.
+	5. Send irrigation alerts.
+Collaborators	Sensor, IrrigationStrategy, WeatherService, IrrigationPump, AlertPublisher
+
+CRC Card 6: AlertPublisher
+Class	AlertPublisher
+Responsibilities	1. Register observers.
+	2. Send notifications to all registered observers.
+Collaborators	AlertObserver, FarmerNotifier, FarmDashboard
+
+
+SensorFactory+createSensor()WeatherService+current()WeatherAPIAdapter+current()IrrigationStrategy+shouldIrrigate()NormalIrrigationStrategy+shouldIrrigate()WaterSavingStrategy+shouldIrrigate()IrrigationController+check()IrrigationPump+setOn()AlertPublisher+subscribe()+publish()FarmerNotifier+update()FarmDashboard+update()

@@ -1,0 +1,73 @@
+Functional Requirements
+1. The citizen can submit complaints.
+2. The citizen can view their complaints.
+3. The administrator can view all complaints.
+4. The administrator can update complaint status.
+5. Users can select different urban services.
+6. The system can send notifications.
+7. The administrator can select routes.
+8. The system can show traffic information.
+
+2. Non-Functional Requirements
+1. Usability: The system should be easy to use.
+2. Performance: The system should work fast.
+3. Security: The system should keep data safe.
+4. Reliability: The system should work correctly.
+5. Maintainability: The system should be easy to update.
+6. Availability: The system should be available when needed.
+
+1. Entity Objects
+Stores data.
+1. Complaint: Stores complaint ID, citizen name, type, location and status.
+2. Citizen: Represents a citizen who submits complaints.
+2. Boundary Objects
+Interact with users or external systems.
+1. Citizen Menu: Allows citizens to submit and view complaints.
+2. Administrator Menu: Allows administrators to manage complaints.
+3. TrafficAPIAdapter: Shows traffic information from an external API.
+3. Control Objects
+Controls system operations.
+1. UrbanDatabase: Manages complaint data.
+2. UrbanServiceFactory: Creates different urban services.
+3. StatusPublisher: Sends notifications.
+4. RoutePlanner: Manages route selection.
+5. DUMSMain: Controls the main program.
+
+6 CRC Cards
+1. Complaint
+Class	Complaint
+Responsibilities	1. Store complaint ID and details.
+	2. Store complaint status.
+Collaborators	Citizen, UrbanDatabase
+
+2. UrbanDatabase
+Class	UrbanDatabase
+Responsibilities	1. Add new complaints.
+	2. Find and show complaints.
+Collaborators	Complaint, Citizen, Administrator
+
+3. UrbanServiceFactory
+Class	UrbanServiceFactory
+Responsibilities	1. Create urban services.
+	2. Select Waste, Traffic or Emergency service.
+Collaborators	UrbanService, WasteService, TrafficService, EmergencyService
+
+4. StatusPublisher
+Class	StatusPublisher
+Responsibilities	1. Send notifications.
+	2. Notify users about complaint updates.
+Collaborators	CitizenNotifier, GovernmentDashboard
+
+5. RoutePlanner
+Class	RoutePlanner
+Responsibilities	1. Select a route strategy.
+	2. Plan the selected route.
+Collaborators	ShortestRoute, FastestRoute
+
+6. TrafficAPIAdapter
+Class	TrafficAPIAdapter
+Responsibilities	1. Connect with external traffic API.
+	2. Show traffic information.
+Collaborators	ExternalTrafficAPI, TrafficServiceAPI
+
+
